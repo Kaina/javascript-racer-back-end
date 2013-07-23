@@ -1,7 +1,26 @@
-$(document).ready(function() {
-  // This is called after the document has loaded in its entirety
-  // This guarantees that any elements we bind to will exist on the page
-  // when we try to bind to them
+function move_cell(id){
+  var active = $(id).find('.active');
+  $(active).next().addClass('active');
+  $(active).removeClass('active');
+  find_winner(active);
+}
 
-  // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
+function find_winner(active){
+  if ($(active).siblings(':last').hasClass('active')){
+    alert($(active).parent().attr('id'));
+  }
+}
+
+$(document).ready(function() {
+  $('body').on('keyup', function(event){
+    if (event.keyCode === 82){
+      move_cell('#player1_strip');
+    }
+    if (event.keyCode === 85){
+      move_cell('#player2_strip');
+    }
+    $('form').on('submit'), function(event){
+      location.reload();
+    };
+  });
 });
